@@ -6,7 +6,7 @@ class OnboardingsController < ApplicationController
     @user = Current.user
     if @user.videos.none?
       redirect_to first_video_onboarding_path
-    elsif @user.videos.none?
+    elsif @user.offers.none?
       redirect_to first_offer_onboarding_path
     else
       redirect_to @user.offers.first
