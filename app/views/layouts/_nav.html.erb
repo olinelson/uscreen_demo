@@ -9,7 +9,29 @@
   </div>
   <div class="navbar-end">
     <% if authenticated? %>
-      <%= link_to "My Account", Current.user, class: "btn btn-primary" %>
+      <button
+        class="btn btn-circle"
+        popovertarget="user-menu"
+        style="anchor-name:--anchor-1"
+      >
+        <%= icon "user-circle", class: "size-7" %>
+      </button>
+      <ul
+        class="
+          dropdown menu w-52 rounded-box bg-base-100 shadow-sm dropdown-end
+        "
+        popover
+        id="user-menu"
+        style="position-anchor:--anchor-1"
+      >
+        <li>
+          <%= link_to "My Account", Current.user %>
+        </li>
+        <li>
+
+          <%= button_to "Log out", session_path, method: :delete %>
+        </li>
+      </ul>
     <% else %>
       <%= link_to "Get Started", new_registration_path, class: "btn btn-primary" %>
     <% end %>
