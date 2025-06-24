@@ -1,0 +1,17 @@
+<div class="navbar bg-base-100 shadow-sm h-16">
+  <div class="navbar-start">
+  </div>
+  <div class="navbar-center">
+    <%= link_to root_path, class: "btn btn-ghost sm:text-lg"  do %>
+      <%= icon "device-tv", class: "text-accent" %>
+      PetitScreen
+    <% end %>
+  </div>
+  <div class="navbar-end">
+    <% if authenticated? %>
+      <%= link_to "My Account", Current.user, class: "btn btn-primary" %>
+    <% else %>
+      <%= link_to "Get Started", new_registration_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

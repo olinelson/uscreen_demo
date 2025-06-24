@@ -1,0 +1,191 @@
+<trix-toolbar id="default-trix-toolbar">
+  <div class="relative">
+    <div class="flex">
+      <button
+        type="button"
+        class="btn btn-square btn-sm btn-ghost"
+        data-trix-attribute="bold"
+        data-trix-key="b"
+        title="Bold"
+        tabindex="-1"
+        data-controller="trix-button"
+      >
+        <%= icon "bold" %>
+      </button>
+      <button
+        aria-current="true"
+        type="button"
+        class="btn btn-square btn-sm btn-ghost"
+        data-trix-attribute="italic"
+        data-trix-key="i"
+        title="Italic"
+        tabindex="-1"
+        data-controller="trix-button"
+      >
+        <%= icon "italic" %>
+      </button>
+      <button
+        type="button"
+        class="btn btn-square btn-sm btn-ghost"
+        data-trix-attribute="strike"
+        title="Strikethrough"
+        tabindex="-1"
+        data-controller="trix-button"
+      >
+        <%= icon "strikethrough" %>
+      </button>
+      <button
+        type="button"
+        class="btn btn-square btn-sm btn-ghost"
+        data-trix-attribute="href"
+        data-trix-action="link"
+        data-trix-key="k"
+        title="Link"
+        tabindex="-1"
+        data-controller="trix-button"
+      >
+        <%= icon "link" %>
+      </button>
+      <button
+        type="button"
+        class="btn btn-square btn-sm btn-ghost"
+        data-trix-attribute="heading1"
+        title="Heading"
+        tabindex="-1"
+        data-controller="trix-button"
+      >
+        <%= icon "heading" %>
+      </button>
+      <button
+        type="button"
+        class="btn btn-square btn-sm btn-ghost"
+        data-trix-attribute="quote"
+        title="Quote"
+        tabindex="-1"
+        data-controller="trix-button"
+      >
+        <%= icon "quote" %>
+      </button>
+      <button
+        type="button"
+        class="btn btn-square btn-sm btn-ghost"
+        data-trix-attribute="bullet"
+        title="Bullets"
+        tabindex="-1"
+        data-controller="trix-button"
+      >
+        <%= icon "list" %>
+      </button>
+      <button
+        type="button"
+        class="btn btn-square btn-sm btn-ghost"
+        data-trix-attribute="number"
+        title="Numbers"
+        tabindex="-1"
+        data-controller="trix-button"
+      >
+        <%= icon "list-numbers" %>
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-square btn-sm btn-ghost hidden"
+        data-trix-action="attachFiles"
+        title="Attach Files"
+        tabindex="-1"
+        data-controller="trix-button"
+      >
+        <%= icon "paperclip" %>
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-square btn-sm btn-ghost hidden"
+        data-trix-action="undo"
+        data-trix-key="z"
+        title="Undo"
+        tabindex="-1"
+      >
+        <%= icon "arrow-back-up" %>
+      </button>
+      <button
+        type="button"
+        class="btn btn-square btn-sm btn-ghost hidden"
+        data-trix-action="redo"
+        data-trix-key="shift+z"
+        title="Redo"
+        tabindex="-1"
+        disabled=""
+      >
+        <%= icon "arrow-forward-up" %>
+      </button>
+    </div>
+
+    <div class="absolute w-full justify-center flex" data-trix-dialogs="">
+      <div
+        class="
+          p-2 mt-4 data-[trix-active]:!grid gap-2 border bg-base-100 items-center
+          rounded-box shadow-sm z-1 w-md max-w-[90%] grid-cols-[1fr_auto_auto]
+        "
+        data-trix-dialog="href"
+        data-trix-dialog-attribute="href"
+      >
+        <input
+          type="url"
+          name="href"
+          class="input w-full"
+          placeholder="Enter a URL…"
+          aria-label="URL"
+          required=""
+          data-trix-input=""
+          disabled="disabled"
+        >
+        <input
+          type="button"
+          class="btn btn-sm btn-primary"
+          value="Link"
+          data-trix-method="setAttribute"
+        >
+        <input
+          type="button"
+          class="btn btn-sm"
+          value="Unlink"
+          data-trix-method="removeAttribute"
+        >
+      </div>
+
+      <div
+        class="trix-dialog trix-dialog--link"
+        data-trix-dialog="href"
+        data-trix-dialog-attribute="href"
+      >
+        <div class="trix-dialog__link-fields">
+          <input
+            type="url"
+            name="href"
+            class="trix-input trix-input--dialog"
+            placeholder="Enter a URL…"
+            aria-label="URL"
+            required=""
+            data-trix-input=""
+            disabled="disabled"
+          >
+          <div class="trix-button-group">
+            <input
+              type="button"
+              class="trix-button trix-button--dialog"
+              value="Link"
+              data-trix-method="setAttribute"
+            >
+            <input
+              type="button"
+              class="trix-button trix-button--dialog"
+              value="Unlink"
+              data-trix-method="removeAttribute"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</trix-toolbar>

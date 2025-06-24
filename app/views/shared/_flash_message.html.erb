@@ -1,0 +1,22 @@
+<%# locals: (message:, key:) %>
+<% alert_types = {
+  "notice" => "alert-info",
+  "alert" => "alert-warning",
+  "error" => "alert-error",
+} %>
+<% alert_class = alert_types[key.to_s] || "alert-error" %>
+<div
+  class="alert alert-soft <%= alert_class %>"
+  data-controller="self-destruct"
+  role="alert"
+  data-turbo-temporary
+>
+  <% if key == "alert" %>
+    <%= icon "alert-triangle" %>
+  <% elsif key == "error" %>
+    <%= icon "exclamation-circle" %>
+  <% elsif key == "notice" %>
+    <%= icon "info-circle" %>
+  <% end %>
+  <span><%= message %></span>
+</div>

@@ -1,0 +1,11 @@
+<div
+  id="flash_messages"
+  class="toast toast-top toast-center mx-auto grid place-items-center"
+  style="z-index: 10000 !important;"
+>
+  <% flash.each do |key, message| %>
+    <%= render partial: "shared/flash_message", locals: { message:, key: } %>
+  <% end %>
+</div>
+<div id="flash_messages_right" class="toast toast-top toast-end z-[1000]">
+</div>

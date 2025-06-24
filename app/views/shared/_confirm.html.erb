@@ -1,0 +1,19 @@
+<dialog
+  id="confirm-modal"
+  class="modal modal-bottom sm:modal-middle"
+  data-controller="confirm"
+>
+  <div class="modal-box">
+    <p class="text-lg font-bold empty:hidden" data-confirm-target="title"></p>
+    <p class="py-4 empty:hidden" data-confirm-target="message"></p>
+    <div class="modal-action">
+      <div>
+        <button data-action="confirm#cancel" class="btn">Cancel</button>
+        <button data-action="confirm#ok" class="btn">Ok</button>
+      </div>
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button data-action="confirm#cancel">close</button>
+  </form>
+</dialog>
