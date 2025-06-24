@@ -1,0 +1,18 @@
+<%# locals: (errors:) %>
+<div
+  data-turbo-temporary
+  role="alert"
+  class="alert alert-error alert-soft alert-horizontal my-2"
+>
+  <%= icon "exclamation-circle" %>
+  <div>
+    <h3 class="font-bold">Something went wrong...</h3>
+    <div class="text-xs">
+      <ul>
+        <% errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
