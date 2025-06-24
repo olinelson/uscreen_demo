@@ -6,9 +6,6 @@
 
   <%= render @video %>
 
-
-
-
   <%= link_to "Edit this video",
   edit_video_path(@video),
   class:
@@ -27,32 +24,6 @@
     turbo_confirm: "Are you sure?",
   } %>
 
-
-  <div
-    class="w-full aspect-video relative"
-    data-video-player-id-value="<%= dom_id @video %>"
-    data-controller="video-player"
-  >
-    <video
-      id="<%= dom_id @video %>"
-      class="video-js vjs-fluid w-full h-full"
-      controls
-      preload="auto"
-      data-poster="<%= polymorphic_url(@video.file.preview(resize_to_limit: [1280, 720])) %>"
-    >
-      <source
-        src="<%= url_for(@video.file)%>"
-        type="application/x-mpegURL"
-      >
-      <p class="vjs-no-js">
-        To view this video please enable JavaScript, and consider upgrading
-        to a web browser that
-        <a href="https://videojs.com/html5-video-support/" target="_blank">
-          supports HTML5 video
-        </a>
-      </p>
-    </video>
-  </div>
-</div>
+  <video src="<%= url_for(@video.file) %>" controls/>
 
 </div>

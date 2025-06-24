@@ -1,2 +1,9 @@
 <h1><%= @user.name %>
   show</h1>
+
+<h4>Videos</h4>
+<%= render @user.videos %>
+
+<h4>Offers</h4>
+<%= render @user.offers %>
+<%= link_to "New Offer", new_offer_path %>
