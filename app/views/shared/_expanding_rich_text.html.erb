@@ -1,0 +1,34 @@
+<%# locals: (form:, id:, default_view: nil ) %>
+<div
+  id="<%= id %>"
+  data-turbo-permanent
+  data-controller="rich-text"
+  data-rich-text-view-value="<%= default_view || "simple" %>"
+  class="group"
+  data-action="
+    keydown.enter->rich-text#onEnter
+    keydown.meta+enter->rich-text#onCommandControlEnter
+    keydown.ctrl+enter->rich-text#onCommandControlEnter
+    rich-text:submitted->form#requestSubmit
+  "
+>
+  <div class="group-data-[rich-text-view-value=simple]:hidden">
+    <trix-toolbar id="my_toolbar" class="h-8"></trix-toolbar>
+  </div>
+  <div class="relative">
+    <%= form.rich_textarea :content,
+                       required: true,
+                       data: {
+                         clear_target: "input",
+                       },
+                       toolbar: "my_toolbar",
+                       autofocus: true,
+                       class: "group-data-[rich-text-view-value=detail]:!min-h-40" %>
+    <div class="absolute bottom-2 right-2">
+      <button
+        class="btn btn-square btn-sm btn-ghost"
+        data-action="rich-text#toggleView:stop:prevent"
+      ><%= icon "text-size" %></button>
+    </div>
+  </div>
+  <div>

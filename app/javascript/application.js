@@ -11,3 +11,6 @@ Trix.config.toolbar.getDefaultHTML = () => {
   const el = document.getElementById("default-trix-toolbar");
   return el.outerHTML;
 };
+
+import "trix"
+import "@rails/actiontext"
