@@ -23,9 +23,17 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(video_params)
     if @video.save
-        redirect_to @video, notice: "Video was successfully created."
-    else
-        render :new, status: :unprocessable_entity
+        return redirect_to @video, notice: "Video was successfully created."
+    end
+    respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream do
+                  render turbo_stream: turbo_stream.replace(
+                    "video_form",
+                    partial: "videos/form",
+                    locals: { video: @video }
+                  )
+        end
     end
   end
 

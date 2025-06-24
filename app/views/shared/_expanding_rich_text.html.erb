@@ -1,4 +1,4 @@
-<%# locals: (form:, id:, default_view: nil ) %>
+<%# locals: (form:, id:, default_view: nil, name: ) %>
 <div
   id="<%= id %>"
   data-turbo-permanent
@@ -16,13 +16,12 @@
     <trix-toolbar id="my_toolbar" class="h-8"></trix-toolbar>
   </div>
   <div class="relative">
-    <%= form.rich_textarea :content,
+    <%= form.rich_textarea :description,
                        required: true,
                        data: {
                          clear_target: "input",
                        },
                        toolbar: "my_toolbar",
-                       autofocus: true,
                        class: "group-data-[rich-text-view-value=detail]:!min-h-40" %>
     <div class="absolute bottom-2 right-2">
       <button

@@ -1,2 +1,5 @@
-<h1>First Video</h1>
-<%= render "steps", steps: @steps, current: "first_video" %>
+<div class="container mx-auto p-4">
+  <h1 class="text-3xl font-semibold">First Video</h1>
+  <%= turbo_frame_tag "video_form", src: new_video_path %>
+  <%= render "steps", steps: @steps, current: "first_video" %>
+</div>

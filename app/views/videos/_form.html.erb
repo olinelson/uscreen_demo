@@ -1,9 +1,9 @@
-<%= form_with(model: video, class: "contents") do |form| %>
+<%= form_with(model: video, class: "contents", data: {controller: "form" }) do |form| %>
   <%= render "shared/form_errors", errors: video.errors if video.errors.any? %>
 
   <fieldset>
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, required: true %>
 
     <%= form.label :file %>
     <%= form.file_field :file %>
@@ -11,6 +11,7 @@
     <%= form.label :description %>
     <%= render "shared/expanding_rich_text",
     form:,
+    name: "description",
     id: "video_description_input",
     default_view: "detail" %>
 
