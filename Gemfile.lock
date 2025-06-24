@@ -355,6 +355,8 @@ GEM
     thruster (0.1.14-arm64-darwin)
     thruster (0.1.14-x86_64-linux)
     timeout (0.4.3)
+    turbo-mount (0.4.3)
+      railties (>= 6.0.0)
     turbo-rails (2.0.16)
       actionpack (>= 7.1.0)
       railties (>= 7.1.0)
@@ -413,6 +415,7 @@ DEPENDENCIES
   sqlite3 (>= 2.1)
   stimulus-rails
   thruster
+  turbo-mount
   turbo-rails
   tzinfo-data
   web-console

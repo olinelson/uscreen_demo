@@ -66,3 +66,4 @@ end
 gem "cssbundling-rails", "~> 1.4"
 
 gem "rails_icons", "~> 1.3"
+gem "turbo-mount"
