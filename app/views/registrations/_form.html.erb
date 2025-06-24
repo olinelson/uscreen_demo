@@ -1,0 +1,58 @@
+<%= form_with id: "registration_form", model: @user, url: registration_path do |form| %>
+  <%= render "shared/form_errors", errors: @user.errors if @user.errors.any? %>
+  <fieldset>
+    <%= form.label :name %>
+    <div>
+      <%= form.text_field :name,
+                      required: true,
+                      placeholder: "Enter your full name",
+                      autofocus: true %>
+      <div class="validator-hint">Name is required</div>
+    </div>
+
+    <%= form.label :email_address %>
+    <div>
+      <%= form.email_field :email_address,
+                       required: true,
+                       autocomplete: "username",
+                       placeholder: "Enter your email address",
+                       value: params[:email_address] %>
+      <div class="validator-hint">Must be a valid email address</div>
+    </div>
+
+    <%= form.label :password %>
+    <div>
+      <%= form.password_field :password,
+                          required: true,
+                          autocomplete: "current-password",
+                          placeholder: "Enter your password",
+                          maxlength: 72 %>
+      <div class="validator-hint">Must be a good password</div>
+    </div>
+  </fieldset>
+
+  <%= form.hidden_field :time_zone, data: { controller: "timezone-input" } %>
+
+  <%= hidden_field_tag :price_id, @price_id %>
+
+  <div>
+    <%= form.submit "Sign Up", class: "w-full btn btn-primary" %>
+    <p class="pt-2 text-xs text-base-content/50">By signing up, you agree to our
+      <a
+        class="link"
+        target="_blank"
+        href="https://maestrocast.com/legal/terms_of_service"
+      >Terms of Service</a>
+      and
+      <a
+        class="link"
+        target="_blank"
+        href="https://maestrocast.com/legal/privacy_policy"
+      >Privacy Policy</a>.</p>
+    <div class="divider">Or</div>
+    <div class="flex justify-between items-center">
+      <%= link_to "Sign in", new_session_path, class: "link" %>
+      <%= link_to "Forgot password?", new_password_path, class: "link" %>
+    </div>
+  </div>
+<% end %>

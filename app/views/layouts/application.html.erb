@@ -22,8 +22,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="min-h-dvh grid grid-rows-[auto_1fr]">
+    <nav class="sticky top-0 z-20">
+      <%# render "layouts/resources" %>
+      <%# render "layouts/nav" %>
+    </nav>
+    <main>
       <%= yield %>
     </main>
   </body>
