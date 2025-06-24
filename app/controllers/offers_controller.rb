@@ -1,12 +1,12 @@
 class OffersController < ApplicationController
   before_action :set_offer, only: %i[ show edit update destroy ]
 
-  # GET /offers or /offers.json
+  # GET /offers
   def index
     @offers = Offer.all
   end
 
-  # GET /offers/1 or /offers/1.json
+  # GET /offers/1
   def show
   end
 
@@ -19,42 +19,30 @@ class OffersController < ApplicationController
   def edit
   end
 
-  # POST /offers or /offers.json
+  # POST /offers
   def create
     @offer = Offer.new(offer_params)
 
-    respond_to do |format|
-      if @offer.save
-        format.html { redirect_to @offer, notice: "Offer was successfully created." }
-        format.json { render :show, status: :created, location: @offer }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @offer.errors, status: :unprocessable_entity }
-      end
+    if @offer.save
+      redirect_to @offer, notice: "Offer was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /offers/1 or /offers/1.json
+  # PATCH/PUT /offers/1
   def update
-    respond_to do |format|
-      if @offer.update(offer_params)
-        format.html { redirect_to @offer, notice: "Offer was successfully updated." }
-        format.json { render :show, status: :ok, location: @offer }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @offer.errors, status: :unprocessable_entity }
-      end
+    if @offer.update(offer_params)
+      redirect_to @offer, notice: "Offer was successfully updated.", status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /offers/1 or /offers/1.json
+  # DELETE /offers/1
   def destroy
     @offer.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to offers_path, status: :see_other, notice: "Offer was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to offers_path, notice: "Offer was successfully destroyed.", status: :see_other
   end
 
   private
