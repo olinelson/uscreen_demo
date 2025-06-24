@@ -5,8 +5,33 @@
     <%= form.label :title %>
     <%= form.text_field :title, required: true %>
 
-    <%= form.label :file %>
-    <%= form.file_field :file %>
+    <label>
+      <div
+        class="
+          dropzone h-50 outline-accent border-dashed border-4 rounded-md w-full grid
+          place-items-center
+        "
+        data-dropzone-drag-drop-observer-outlet="body"
+        data-controller="dropzone direct-upload"
+        data-action="
+          dragover->dropzone#dragOver
+          dragleave->dropzone#dragLeave
+          drop->dropzone#drop
+        "
+      >
+        <%= form.file_field :file,
+                        direct_upload: true,
+                        class: "hidden",
+                        accept: "image/*",
+                        data: {
+                          directUploadTarget: "input",
+                        } %>
+        <div class="grid place-items-center">
+          <h4>Drop your video file here</h4>
+          <%= icon "download", class: "size-10" %>
+        </div>
+      </div>
+    </label>
 
     <%= form.label :description %>
     <%= render "shared/expanding_rich_text",
