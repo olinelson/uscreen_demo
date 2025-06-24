@@ -22,11 +22,18 @@ class OffersController < ApplicationController
   # POST /offers
   def create
     @offer = Offer.new(offer_params)
-
     if @offer.save
-      redirect_to @offer, notice: "Offer was successfully created."
-    else
-      render :new, status: :unprocessable_entity
+      return redirect_to @offer, notice: "Offer was successfully created."
+    end
+    respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream do
+                  render turbo_stream: turbo_stream.replace(
+                    "offer_form",
+                    partial: "offers/form",
+                    locals: { offer: @offer }
+                  )
+        end
     end
   end
 

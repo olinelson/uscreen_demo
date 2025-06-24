@@ -1,4 +1,4 @@
-<%= form_with(model: video, class: "contents", data: {controller: "form", turbo_frame: "_top" }) do |form| %>
+<%= form_with(model: video, data: {controller: "form", turbo_frame: "_top" }) do |form| %>
   <%= render "shared/form_errors", errors: video.errors if video.errors.any? %>
 
   <fieldset>
