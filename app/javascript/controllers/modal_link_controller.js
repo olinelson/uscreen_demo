@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { createElement } from "helpers/html"
+import { createElement } from "../helpers/html"
 
 // Connects to data-controller="modal-link"
 export default class extends Controller {

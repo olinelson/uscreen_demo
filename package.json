@@ -7,7 +7,8 @@
     "typescript": "^5"
   },
   "scripts": {
-    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify"
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
+    "build": "bun bun.config.js"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.1",
@@ -18,5 +19,16 @@
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "tailwindcss": "^4.1.1"
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.16",
+    "@rails/actiontext": "^8.0.200",
+    "@rails/activestorage": "^8.0.200",
+    "canvas-confetti": "^1.9.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "trix": "^2.1.15",
+    "turbo-mount": "^0.4.3"
   }
 }

@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { pageIsTurboPreview } from "helpers/turbo"
+import { pageIsTurboPreview } from "../helpers/turbo"
 
 export default class extends Controller {
   static values = { id: String }

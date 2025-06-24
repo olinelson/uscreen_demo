@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { copyText } from "helpers/clipboard"
+import { copyText } from "../helpers/clipboard"
 
 // Connects to data-controller="clipboard"
 export default class extends Controller {

@@ -1,0 +1,131 @@
+import React, { useEffect, useRef, useState } from "react"
+import { DirectUpload } from "@rails/activestorage"
+
+export default function Dropzone({
+  url,
+  name,
+  accept,
+  acceptDescription,
+  icon,
+}) {
+  const fileInputRef = useRef(null)
+  const hiddenInputRef = useRef(null)
+  const [uploading, setUploading] = useState(false)
+  const [progress, setProgress] = useState(0)
+  const [error, setError] = useState(null)
+  const [file, setFile] = useState(null)
+  const fileUploadComplete = progress == 100 && file
+
+  console.log(icon)
+
+  useEffect(() => {
+    if (!file) return
+    handleFileUpload(file)
+  }, [file])
+
+  const handleFileUpload = (file) => {
+    if (!isFileValid(file)) return setError(acceptDescription)
+    setUploading(true)
+    setError(null)
+    setProgress(0)
+
+    const upload = new DirectUpload(file, url, {
+      directUploadWillStoreFileWithXHR,
+    })
+
+    upload.create((error, blob) => {
+      if (error) {
+        console.error(error)
+        setError("Upload failed. Please try again.")
+        setUploading(false)
+        return
+      }
+      hiddenInputRef.current.value = blob.signed_id
+      setUploading(false)
+      setProgress(100)
+    })
+  }
+
+  const isFileValid = (file) => {
+    accept.split(",").some((allowedType) => {
+      if (allowedType.endsWith("/*")) {
+        const baseType = allowedType.split("/").at(0)
+        return file.type.startsWith(`${baseType}/`)
+      }
+      return file.type === allowedType
+    })
+  }
+
+  const directUploadWillStoreFileWithXHR = (request) => {
+    request.upload.addEventListener("progress", (event) => {
+      if (!event.lengthComputable) return
+      const progressPercent = Math.round((event.loaded / event.total) * 100)
+      setProgress(progressPercent)
+    })
+  }
+
+  const handleDrop = (event) => {
+    event.preventDefault()
+    const file = event.dataTransfer.files[0]
+    setFile(file)
+  }
+
+  const handleInputChange = (event) => {
+    const file = event.target.files[0]
+    setFile(file)
+  }
+
+  const FileSuccess = () => (
+    <div>
+      <h4>{file.name} Uploaded</h4>
+    </div>
+  )
+
+  const Uploading = () => (
+    <div className="flex flex-col items-center">
+      <span className="loading loading-spinner loading-lg"></span>
+      <p className="mt-2">Uploading... {progress}%</p>
+    </div>
+  )
+
+  const Ready = () => (
+    <div class="grid place-items-center h-full">
+      <div class="grid place-items-center gap-2">
+        <div dangerouslySetInnerHTML={{ __html: icon }} />
+        <p> Drag and drop a file here, or click to upload</p>
+      </div>
+    </div>
+  )
+
+  return (
+    <div>
+      <label>
+        <div className="flex flex-col items-center w-full">
+          <div
+            className="h-40 border-2 border-dashed border-gray-300 rounded-lg p-4 w-full text-center cursor-pointer"
+            onDrop={handleDrop}
+            onDragOver={(e) => e.preventDefault()}
+          >
+            {fileUploadComplete ? (
+              <FileSuccess />
+            ) : uploading ? (
+              <Uploading />
+            ) : (
+              <Ready />
+            )}
+          </div>
+          {error && <p className="text-red-500 mt-2">{error}</p>}
+          <input
+            type="file"
+            ref={fileInputRef}
+            className="hidden"
+            onChange={handleInputChange}
+            accept={accept}
+          />
+        </div>
+      </label>
+
+      <input type="hidden" name={name} ref={hiddenInputRef} />
+    </div>
+  )
+}
