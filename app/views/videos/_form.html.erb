@@ -5,18 +5,20 @@
     <%= form.label :title %>
     <%= form.text_field :title, required: true %>
 
-    <%= form.label :file %>
-    <%= turbo_mount(
-      "Dropzone",
-      props: {
-        url: rails_direct_uploads_url,
-        name: "video[file]",
-        accept: "video/*",
-        acceptDescription: "Only video files are permitted.",
-        downloadIcon: "#{icon("download", class: "size-8")}",
-        circleCheckIcon: "#{icon("circle-check", class: "text-success size-8")}",
-      },
-    ) %>
+    <% if !video.persisted? %>
+      <%= form.label :file %>
+      <%= turbo_mount(
+        "Dropzone",
+        props: {
+          url: rails_direct_uploads_url,
+          name: "video[file]",
+          accept: "video/*",
+          acceptDescription: "Only video files are permitted.",
+          downloadIcon: "#{icon("download", class: "size-8")}",
+          circleCheckIcon: "#{icon("circle-check", class: "text-success size-8")}",
+        },
+      ) %>
+    <% end %>
 
     <%= form.label :description %>
     <%= render "shared/expanding_rich_text",

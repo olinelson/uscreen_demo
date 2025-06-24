@@ -21,7 +21,7 @@ class VideosController < ApplicationController
 
   # POST /videos or /videos.json
   def create
-    @video = Video.new(video_params)
+    @video = Video.new(video_create_params)
     if @video.save
         return redirect_to @video, notice: "Video was successfully created."
     end
@@ -39,7 +39,7 @@ class VideosController < ApplicationController
 
   # PATCH/PUT /videos/1 or /videos/1.json
   def update
-    if @video.update(video_params)
+    if @video.update(video_update_params)
       redirect_to @video, notice: "Video was successfully updated."
     else
       render :edit, status: :unprocessable_entity
@@ -58,8 +58,11 @@ class VideosController < ApplicationController
       @video = Video.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
-    def video_params
+    def video_create_params
       params.expect(video: [ :title, :description, :user_id, :file ])
+    end
+
+    def video_update_params
+      params.expect(video: [ :title, :description  ])
     end
 end
