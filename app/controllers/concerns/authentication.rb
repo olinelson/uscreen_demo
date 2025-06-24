@@ -35,6 +35,11 @@ module Authentication
     end
 
     def after_authentication_url
+      user = Current.user
+      if user.videos.none?
+        return new_video_path
+      else
+      end
       session.delete(:return_to_after_authenticating) || root_url
     end
 

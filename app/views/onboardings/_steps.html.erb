@@ -1,0 +1,6 @@
+<%# locals: (current:, steps:) %>
+<ul class="steps w-full">
+  <% steps.each_with_index do |step, index| %>
+    <li class="step <%= index >= steps.index(step) ? "step-primary" : ""  %>"><%= step.tr("_", " ").capitalize %></li>
+  <% end %>
+</ul>

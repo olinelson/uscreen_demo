@@ -7,3 +7,5 @@
 <h4>Offers</h4>
 <%= render @user.offers %>
 <%= link_to "New Offer", new_offer_path %>
+
+<%= button_to "Log out", session_path, method: :delete %>
