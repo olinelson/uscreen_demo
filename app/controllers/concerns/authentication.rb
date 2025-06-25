@@ -40,7 +40,7 @@ module Authentication
         return onboarding_path
       else
       end
-      session.delete(:return_to_after_authenticating) || root_url
+      session.delete(:return_to_after_authenticating) || user_url(Current.user)
     end
 
     def start_new_session_for(user)

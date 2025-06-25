@@ -1,1 +1,18 @@
-<h1 class="text-4xl">Hello World</h1>
+<div class="hero bg-base-200 min-h-screen">
+  <div class="hero-content text-center">
+    <div class="max-w-lg">
+      <h1 class="text-6xl font-bold">Turn Your Passion into Profit</h1>
+      <p class="py-6">
+        Everything You Need to Turn Viewers into Paying Subscribers
+      </p>
+      <%= link_to "Get Started Free", new_session_path, class: "btn btn-primary btn-lg" %>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto">
+  <h4 class="text-3xl font-semibold pb-4">Latest Creator Launches</h4>
+  <div class="flex flex-wrap gap-4">
+    <%= render Offer.all %>
+  </div>
+</div>
