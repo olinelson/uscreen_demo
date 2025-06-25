@@ -1,26 +1,58 @@
-<% content_for :title, "Showing offer" %>
+<% content_for :title, @offer.title %>
+<div class="hero bg-base-200 min-h-screen relative">
+  <div>
+    <div class="hero-content flex flex-col lg:flex-row">
+      <% if @offer.videos.any? %>
+        <img
+          class="max-w-sm rounded aspect-video object-cover shadow-2xl"
+          src="<%= polymorphic_url(@offer.videos.first.file.preview(resize_to_limit: [1280, 720]))%>"
+          alt="<%= @offer.videos.first.title %>"
+        />
+      <% end %>
+      <div>
+        <h1 class="text-5xl font-bold"><%= @offer.title %></h1>
+        <p class="py-6 max-w-sm">
+          <%= @offer.subtitle %>
 
-<div class="md:w-2/3 w-full">
+        </p>
+        <% if @offer.videos.any? %>
+          <%= link_to "Get Started", @offer.videos.first, class: "btn btn-primary btn-lg" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="p-4">
+      <div class="card w-full max-w-3xl bg-base-100 card-md shadow-sm">
+        <div class="card-body">
+          <%= @offer.description %>
+        </div>
+      </div>
+    </div>
 
-  <h1 class="font-bold text-4xl">Showing offer</h1>
+  </div>
 
-  <%= render @offer %>
-
-  <%= link_to "Edit this offer",
-  edit_offer_path(@offer),
-  class:
-    "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to offers",
-  offers_path,
-  class:
-    "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= button_to "Destroy this offer",
-  @offer,
-  method: :delete,
-  form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2",
-  class:
-    "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer",
-  data: {
-    turbo_confirm: "Are you sure?",
-  } %>
+  <button
+    class="btn btn-square absolute top-4 right-4"
+    popovertarget="popover-1"
+    style="anchor-name:--anchor-1"
+  >
+    <%= icon "dots" %>
+  </button>
+  <ul
+    class="dropdown dropdown-end menu w-52 rounded-box bg-base-100 shadow-sm"
+    popover
+    id="popover-1"
+    style="position-anchor:--anchor-1"
+  >
+    <li>
+      <%= link_to "Edit this offer", edit_offer_path(@offer) %>
+    </li>
+    <li>
+      <%= button_to "Delete offer",
+      @offer,
+      method: :delete,
+      data: {
+        turbo_confirm: "Are you sure?:Deleting an offer can't be undone.",
+      } %>
+    </li>
+  </ul>
 </div>
