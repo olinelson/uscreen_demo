@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   root "pages#index"
 
-  resources :offers
-  resources :videos
+  resources :offers, except: [ :index ]
+  resources :videos, except: [ :index ]
   resource :session
   resource :registration
   resources :passwords, param: :token
