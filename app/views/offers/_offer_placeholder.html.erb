@@ -9,5 +9,8 @@
     <%= icon "plus" %>
     Create Offer
   </div>
-  <%= link_to "", new_offer_path, class: "inset-0 absolute" %>
+  <%= modal_link "",
+  new_offer_path,
+  id: "new_offer_modal",
+  class: "inset-0 absolute cursor-pointer" %>
 </div>
