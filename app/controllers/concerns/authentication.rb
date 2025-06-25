@@ -40,11 +40,12 @@ module Authentication
 
     def after_authentication_url
       user = Current.user
+      path = user_url(Current.user)
       if user.videos.none? || user.offers.none?
-        return onboarding_path
+        path = onboarding_path
       else
       end
-      session.delete(:return_to_after_authenticating) || user_url(Current.user)
+      session.delete(:return_to_after_authenticating) || path
     end
 
     def start_new_session_for(user)
