@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html data-theme="pastel">
   <%= render "layouts/head" %>
-  <body
-    data-controller="drag-drop-observer"
-    data-action="
-      dragenter@document->drag-drop-observer#dragEnter
-      dragleave@document->drag-drop-observer#dragLeave
-    "
-    data-drag-drop-observer-dropzone-outlet=".dropzone"
-    class="min-h-dvh grid grid-rows-[auto_1fr]"
-  >
+  <body data-controller="plausible" class="min-h-dvh grid grid-rows-[auto_1fr]">
     <nav class="sticky top-0 z-20">
       <%= render "layouts/resources" %>
       <%= render "layouts/nav" %>

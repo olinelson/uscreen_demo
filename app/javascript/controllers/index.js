@@ -22,6 +22,9 @@ application.register("modal", ModalController)
 import ModalLinkController from "./modal_link_controller"
 application.register("modal-link", ModalLinkController)
 
+import PlausibleController from "./plausible_controller"
+application.register("plausible", PlausibleController)
+
 import RichTextController from "./rich_text_controller"
 application.register("rich-text", RichTextController)
 

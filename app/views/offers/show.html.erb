@@ -3,12 +3,12 @@
   <% if authenticated? && @offer.user == current_user %>
 
     <div class="absolute top-4 left-4">
-      <%= button_to @offer, method: :patch, form: {data: {controller: "form"} }, params: { offer: { status:  @offer.published? ? :draft : :published } }, class: "label plausible-event-name=offer_publish_click" do %>
+      <%= button_to @offer, method: :patch, form: {data: {controller: "form", action: "plausible#track", plausible_event_param: "offer_publish_click" } }, params: { offer: { status:  @offer.published? ? :draft : :published } }, class: "label" do %>
         <input
          data-action="click->form#requestSubmit"
          type="checkbox"
          <%= @offer.published? ? "checked" : "" %>
-         class="toggle toggle-accent plausible-event-name=offer_publish_click">
+         class="toggle toggle-accent ">
         </input>
         <%= icon "world" %>
         Public
