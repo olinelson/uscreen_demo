@@ -3,7 +3,7 @@
   <div class="divider"></div>
 
   <h4 class="text-2xl pb-2">Videos</h4>
-  <div class="pb-4">
+  <div class="pb-4 flex flex-wrap gap-4">
     <%= render @user.videos %>
     <div class="only:block hidden">
       <%= render "videos/video_placeholder" %>
@@ -11,14 +11,10 @@
   </div>
 
   <h4 class="text-2xl pb-2">Offers</h4>
-  <div class="pb-4">
+  <div class="flex gap-4 flex-wrap">
     <%= render @user.offers %>
     <div class="only:block hidden">
       <%= render "offers/offer_placeholder" %>
     </div>
   </div>
-
-  <div class="divider">More</div>
-
-  <%= button_to "Log out", session_path, method: :delete, class: "btn btn-warning" %>
 </div>
