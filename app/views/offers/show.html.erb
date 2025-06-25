@@ -1,19 +1,35 @@
 <% content_for :title, @offer.title %>
 <div class="hero bg-base-200 min-h-screen relative">
   <% if authenticated? && @offer.user == current_user %>
-    <div class="fixed top-20 z-50">
-      <button
-        class="btn btn-primary btn-wide gap-2 group"
-        data-controller="clipboard"
-        data-clipboard-to-copy-value="<%= request.original_url %>"
-        data-clipboard-copied-value="false"
-        data-action="clipboard#copy"
-      >
-        <%= icon "share" %>
-        <span class="font-semibold group-data-[clipboard-copied-value=false]:hidden">Copied to clipboard!</span>
-        <span class="font-semibold group-data-[clipboard-copied-value=true]:hidden">Share This Offer</span>
-      </button>
+
+    <div class="absolute top-4 left-4">
+      <%= button_to @offer, method: :patch, form: {data: {controller: "form"} }, params: { offer: { status:  @offer.published? ? :draft : :published } }, class: "label" do %>
+        <input
+         data-action="click->form#requestSubmit"
+         type="checkbox"
+         <%= @offer.published? ? "checked" : "" %>
+         class="toggle toggle-accent">
+        </input>
+        <%= icon "world" %>
+        Public
+      <% end %>
     </div>
+
+    <% if @offer.published? %>
+        <div class="absolute top-4 z-50">
+        <button
+            class="btn btn-primary btn-wide gap-2 group"
+            data-controller="clipboard"
+            data-clipboard-to-copy-value="<%= request.original_url %>"
+            data-clipboard-copied-value="false"
+            data-action="clipboard#copy"
+        >
+            <%= icon "share" %>
+            <span class="font-semibold group-data-[clipboard-copied-value=false]:hidden">Copied to clipboard!</span>
+            <span class="font-semibold group-data-[clipboard-copied-value=true]:hidden">Share This Offer</span>
+        </button>
+        </div>
+    <% end %>
   <% end %>
   <div>
     <%= render "offers/hero_content", offer: @offer %>
