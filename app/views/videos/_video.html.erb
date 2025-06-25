@@ -5,11 +5,13 @@
     transition-transform duration-200 hover:scale-105 shadow-md
   "
 >
-  <img
-    src="<%= polymorphic_url(video.file.preview(resize_to_limit: [1280, 720]))%>"
-    alt="<%= video.title %>"
-    class="absolute inset-0"
-  />
+  <% if video.file.attached? %>
+    <img
+      src="<%= polymorphic_url(video.file.preview(resize_to_limit: [1280, 720]))%>"
+      alt="<%= video.title %>"
+      class="absolute inset-0"
+    />
+  <% end %>
   <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
   <div class="absolute inset-0 flex items-end">
     <div class="p-2">

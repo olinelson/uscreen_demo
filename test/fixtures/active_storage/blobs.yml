@@ -1,0 +1,1 @@
+video_one_blob: <%= ActiveStorage::FixtureSet.blob filename: "miles.mp4", service_name: "test_fixtures" %>

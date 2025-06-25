@@ -1,6 +1,7 @@
 <%# locals: (offer:) %>
 <div class="hero-content flex flex-col lg:flex-row">
-  <% if offer.videos.any? %>
+  <% first = offer.videos.first %>
+  <% if first && first.file.attached? %>
     <img
       class="w-sm rounded aspect-video object-cover shadow-2xl"
       src="<%= polymorphic_url(offer.videos.first.file.preview(resize_to_limit: [1280, 720]))%>"
