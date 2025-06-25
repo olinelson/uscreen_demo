@@ -422,6 +422,8 @@ GEM
     unicode-emoji (4.0.4)
     uri (1.0.3)
     useragent (0.16.11)
+    vips (8.15.1)
+      ffi (~> 1.12)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -479,6 +481,7 @@ DEPENDENCIES
   turbo-mount
   turbo-rails
   tzinfo-data
+  vips
   web-console
 
 BUNDLED WITH
