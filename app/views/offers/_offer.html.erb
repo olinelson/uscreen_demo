@@ -5,26 +5,11 @@
     duration-200 hover:scale-105 shadow-md overflow-hidden bg-base-100
   "
 >
-  <div class="w-full h-full p-2">
-    <div class="grid place-items-center pb-2">
-      <h4 class="text-3xl semibold"><%= offer.title %></h4>
-      <h4 class="text-xs max-w-40"><%= offer.subtitle %></h4>
-    </div>
-
-    <div class="grid place-items-center">
-      <% if offer.videos.any? %>
-        <img
-          class="w-48 aspect-video object-contain"
-          src="<%= polymorphic_url(offer.videos.first.file.preview(resize_to_limit: [1280, 720]))%>"
-          alt="<%= offer.videos.first.title %>"
-        />
-      <% else %>
-        <div class="w-48 aspect-video bg-base-300 grid place-items-center">
-          <%= icon "video", class: "opacity-60 size-8" %>
-        </div>
-      <% end %>
-    </div>
+  <div
+    style="width: 333%; height: 333%; transform: scale(0.3) translateY(5%);"
+    class="origin-top-left"
+  >
+    <%= render "offers/hero_content", offer: %>
   </div>
-
   <%= link_to "", offer, class: "inset-0 absolute" %>
 </div>
