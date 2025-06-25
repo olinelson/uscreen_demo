@@ -3,7 +3,9 @@
   <% if authenticated? && @offer.user == current_user %>
 
     <div class="absolute top-4 left-4">
-      <%= button_to @offer, method: :patch, form: {data: {controller: "form", action: "plausible#track", plausible_event_param: "offer_publish_click" } }, params: { offer: { status:  @offer.published? ? :draft : :published } }, class: "label" do %>
+      <% form = {data: {controller: "form", action: "plausible#track", plausible_event_param: "offer_#{@offer.published? ? "unpublish" : "publish" }_click" } } %>
+      <% params = { offer: { status:  @offer.published? ? :draft : :published } } %>
+      <%= button_to @offer, method: :patch, form: , params: , class: "label" do %>
         <input
          data-action="click->form#requestSubmit"
          type="checkbox"

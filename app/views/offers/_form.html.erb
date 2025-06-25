@@ -28,7 +28,7 @@
 
     <%= form.label :videos, "Select Videos" %>
     <div class="pb-6">
-      <%= form.collection_check_boxes :video_ids, Video.all, :id, :title do |b| %>
+      <%= form.collection_check_boxes :video_ids, current_user.videos, :id, :title do |b| %>
         <%= b.label class: "aspect-video w-xs" do %>
           <div class="relative">
             <%= render b.object %>
