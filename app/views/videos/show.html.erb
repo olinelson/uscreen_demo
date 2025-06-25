@@ -19,7 +19,12 @@
         <%= modal_link "Edit video", edit_video_path(@video), id: "edit_video_modal" %>
       </li>
       <li>
-        <%= button_to "Delete video", video_path(@video), method: :delete %>
+        <%= button_to "Delete video",
+        video_path(@video),
+        method: :delete,
+        data: {
+          turbo_confirm: "Are you sure?:Deleting a video can't be undone.",
+        } %>
       </li>
     <% end %>
   </div>
