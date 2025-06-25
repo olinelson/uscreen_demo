@@ -10,5 +10,6 @@ export default class extends Controller {
   copy() {
     copyText(this.toCopyValue)
     this.copiedValue = true
+    setTimeout(() => (this.copiedValue = false), 3000)
   }
 }
