@@ -8,23 +8,29 @@
 
   <fieldset>
     <%= form.label :title %>
-    <%= form.text_field :title,
-                    required: true,
-                    placeholder: "Enter a descriptive title for your video" %>
+    <div>
+      <%= form.text_field :title,
+                      required: true,
+                      placeholder: "Enter a descriptive title for your video" %>
+
+      <div class="validator-hint">Can't be blank</div>
+    </div>
 
     <% if !video.persisted? %>
       <%= form.label :file %>
-      <%= turbo_mount(
-        "Dropzone",
-        props: {
-          url: rails_direct_uploads_url,
-          name: "video[file]",
-          accept: "video/*",
-          acceptDescription: "Only video files are permitted.",
-          downloadIcon: "#{icon("download", class: "size-8")}",
-          circleCheckIcon: "#{icon("circle-check", class: "text-success size-8")}",
-        },
-      ) %>
+      <div class="pb-4">
+        <%= turbo_mount(
+          "Dropzone",
+          props: {
+            url: rails_direct_uploads_url,
+            name: "video[file]",
+            accept: "video/*",
+            acceptDescription: "Only video files are permitted.",
+            downloadIcon: "#{icon("download", class: "size-8")}",
+            circleCheckIcon: "#{icon("circle-check", class: "text-success size-8")}",
+          },
+        ) %>
+      </div>
     <% end %>
 
     <%= form.label :description %>

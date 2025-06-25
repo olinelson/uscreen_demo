@@ -9,26 +9,37 @@
   <fieldset>
     <%= form.hidden_field :user_id, value: Current.user.id %>
     <%= form.label :title %>
-    <%= form.text_field :title,
-                    required: :true,
-                    placeholder:
-                      "Enter your offer title - eg. 'Premium Video Course Bundle'" %>
+    <div>
+      <%= form.text_field :title,
+                      required: :true,
+                      placeholder:
+                        "Enter your offer title - eg. 'Premium Video Course Bundle'" %>
+      <div class="validator-hint">Can't be blank</div>
+    </div>
     <%= form.label :subtitle %>
-    <%= form.text_field :subtitle,
-                    required: :true,
-                    placeholder:
-                      "Add a compelling subtitle that describes your offer" %>
+    <div>
+      <%= form.text_field :subtitle,
+                      required: :true,
+                      placeholder:
+                        "Add a compelling subtitle that describes your offer" %>
+
+      <div class="validator-hint">Can't be blank</div>
+    </div>
+
     <%= form.label :videos, "Select Videos" %>
-    <%= form.collection_check_boxes :video_ids, Video.all, :id, :title do |b| %>
-      <%= b.label class: "aspect-video w-xs" do %>
-        <div class="relative">
-          <%= render b.object %>
-          <div class="absolute inset-0 grid place-items-center">
-            <%= b.check_box(class: "checkbox checkbox-primary") %>
+    <div class="pb-6">
+      <%= form.collection_check_boxes :video_ids, Video.all, :id, :title do |b| %>
+        <%= b.label class: "aspect-video w-xs" do %>
+          <div class="relative">
+            <%= render b.object %>
+            <div class="absolute inset-0 grid place-items-center">
+              <%= b.check_box(class: "checkbox checkbox-primary") %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
+
     <%= form.label :description %>
     <%= render "shared/expanding_rich_text",
     form:,

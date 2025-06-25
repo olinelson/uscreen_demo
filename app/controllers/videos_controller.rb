@@ -1,28 +1,27 @@
 class VideosController < ApplicationController
   before_action :set_video, only: %i[ show edit update destroy ]
 
-  # GET /videos or /videos.json
-  def index
-    @videos = Video.all
-  end
-
   # GET /videos/1 or /videos/1.json
   def show
+    authorize! @video
   end
 
   # GET /videos/new
   def new
+    authorize!
     @video = Video.new
     @return_to = params[:return_to]
   end
 
   # GET /videos/1/edit
   def edit
+    authorize! @video
   end
 
   # POST /videos or /videos.json
   def create
     @video = Video.new(video_create_params)
+    authorize! @video
     if @video.save
         return redirect_to params.fetch("return_to", @video), notice: "Video was successfully created."
     end
@@ -40,6 +39,7 @@ class VideosController < ApplicationController
 
   # PATCH/PUT /videos/1 or /videos/1.json
   def update
+    authorize! @video
     if @video.update(video_update_params)
       redirect_to @video, notice: "Video was successfully updated."
     else
@@ -49,6 +49,7 @@ class VideosController < ApplicationController
 
   # DELETE /videos/1 or /videos/1.json
   def destroy
+    authorize! @video
     @video.destroy!
     redirect_to Current.user, status: :see_other, notice: "Video was successfully destroyed."
   end

@@ -67,5 +67,5 @@ gem "cssbundling-rails", "~> 1.4"
 
 gem "rails_icons", "~> 1.3"
 gem "turbo-mount"
-
 gem "jsbundling-rails", "~> 1.3"
+gem "action_policy"
