@@ -8,4 +8,5 @@ class Offer < ApplicationRecord
   validates :title, presence: true
   validates :subtitle, presence: true
   validates :description, presence: true
+  validates :videos, presence: { message: "must be selected (at least one)" }
 end
