@@ -49,7 +49,7 @@ class VideosController < ApplicationController
   # DELETE /videos/1 or /videos/1.json
   def destroy
     @video.destroy!
-    redirect_to videos_path, status: :see_other, notice: "Video was successfully destroyed."
+    redirect_to Current.user, status: :see_other, notice: "Video was successfully destroyed."
   end
 
   private

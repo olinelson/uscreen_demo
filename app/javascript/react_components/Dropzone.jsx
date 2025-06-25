@@ -77,7 +77,12 @@ export default function Dropzone({
   const FileSuccess = () => (
     <div class="grid place-items-center gap-2">
       <div dangerouslySetInnerHTML={{ __html: circleCheckIcon }} />
-      <h4>{file.name} Uploaded</h4>
+      <h4 class="flex gap-1">
+        <span class="truncate max-w-20 overflow-hidden text-ellipsis whitespace-nowrap block">
+          {file.name}
+        </span>{" "}
+        Uploaded
+      </h4>
     </div>
   )
 

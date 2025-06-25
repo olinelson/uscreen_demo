@@ -1,11 +1,6 @@
 class OffersController < ApplicationController
   before_action :set_offer, only: %i[ show edit update destroy ]
 
-  # GET /offers
-  def index
-    @offers = Offer.all
-  end
-
   # GET /offers/1
   def show
   end
@@ -49,7 +44,7 @@ class OffersController < ApplicationController
   # DELETE /offers/1
   def destroy
     @offer.destroy!
-    redirect_to offers_path, notice: "Offer was successfully destroyed.", status: :see_other
+    redirect_to Current.user, notice: "Offer was successfully destroyed.", status: :see_other
   end
 
   private
