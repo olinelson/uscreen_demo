@@ -12,3 +12,7 @@ Trix.config.toolbar.getDefaultHTML = () => {
   const el = document.getElementById("default-trix-toolbar")
   return el.outerHTML
 }
+
+document.addEventListener("turbo:load", () => {
+  if (typeof plausible !== "undefined") plausible("pageview")
+})
