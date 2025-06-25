@@ -69,3 +69,9 @@ gem "rails_icons", "~> 1.3"
 gem "turbo-mount"
 gem "jsbundling-rails", "~> 1.3"
 gem "action_policy"
+
+gem "dockerfile-rails", ">= 1.7", group: :development
+
+gem "litestream", "~> 0.14.0"
+
+gem "aws-sdk-s3", "~> 1.190", require: false
