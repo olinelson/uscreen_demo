@@ -16,7 +16,7 @@
     </div>
 
     <% if @offer.published? %>
-        <div class="absolute top-4 z-50">
+        <div class="absolute top-4 z-10">
         <button
             class="btn btn-primary btn-wide gap-2 group"
             data-controller="clipboard"
@@ -44,6 +44,7 @@
         <%= button_to "Delete offer",
         @offer,
         method: :delete,
+        class: "cursor-pointer",
         data: {
           turbo_confirm: "Are you sure?:Deleting an offer can't be undone.",
         } %>
