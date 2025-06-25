@@ -10,7 +10,7 @@
 
     <%= render "shared/dropdown", icon: "dots", square: true, direction: "end" do %>
       <li>
-        <%= link_to "Edit video", edit_video_path(@video) %>
+        <%= modal_link "Edit video", edit_video_path(@video), id: "edit_video_modal" %>
       </li>
       <li>
         <%= button_to "Delete video", video_path(@video), method: :delete %>
