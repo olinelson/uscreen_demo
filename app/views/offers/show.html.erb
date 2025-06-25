@@ -3,12 +3,12 @@
   <% if authenticated? && @offer.user == current_user %>
 
     <div class="absolute top-4 left-4">
-      <%= button_to @offer, method: :patch, form: {data: {controller: "form"} }, params: { offer: { status:  @offer.published? ? :draft : :published } }, class: "label" do %>
+      <%= button_to @offer, method: :patch, form: {data: {controller: "form"} }, params: { offer: { status:  @offer.published? ? :draft : :published } }, class: "label plausible-event-name=offer_publish_click" do %>
         <input
          data-action="click->form#requestSubmit"
          type="checkbox"
          <%= @offer.published? ? "checked" : "" %>
-         class="toggle toggle-accent">
+         class="toggle toggle-accent plausible-event-name=offer_publish_click">
         </input>
         <%= icon "world" %>
         Public
@@ -30,26 +30,28 @@
         </button>
         </div>
     <% end %>
+
+    <div class="absolute top-4 right-4">
+      <%= render "shared/dropdown", icon: "dots", square: true, direction: "end" do %>
+        <li>
+          <%= link_to "Edit this offer", edit_offer_path(@offer) %>
+        </li>
+        <li>
+          <%= button_to "Delete offer",
+          @offer,
+          method: :delete,
+          class: "cursor-pointer",
+          data: {
+            turbo_confirm: "Are you sure?:Deleting an offer can't be undone.",
+          } %>
+        </li>
+      <% end %>
+    </div>
   <% end %>
   <div>
     <%= render "offers/hero_content", offer: @offer %>
   </div>
 
-  <div class="absolute top-4 right-4">
-    <%= render "shared/dropdown", icon: "dots", square: true, direction: "end" do %>
-      <li>
-        <%= link_to "Edit this offer", edit_offer_path(@offer) %>
-      </li>
-      <li>
-        <%= button_to "Delete offer",
-        @offer,
-        method: :delete,
-        class: "cursor-pointer",
-        data: {
-          turbo_confirm: "Are you sure?:Deleting an offer can't be undone.",
-        } %>
-      </li>
-    <% end %>
-  </div>
+
 
 </div>
