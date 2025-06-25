@@ -3,7 +3,9 @@
 
   <fieldset>
     <%= form.label :title %>
-    <%= form.text_field :title, required: true %>
+    <%= form.text_field :title,
+                    required: true,
+                    placeholder: "Enter a descriptive title for your video" %>
 
     <% if !video.persisted? %>
       <%= form.label :file %>
@@ -25,7 +27,8 @@
     form:,
     name: "description",
     id: "video_description_input",
-    default_view: "detail" %>
+    default_view: "detail",
+    placeholder: "Enter a detailed description here..." %>
 
     <%= form.hidden_field :user_id, value: Current.user.id %>
   </fieldset>

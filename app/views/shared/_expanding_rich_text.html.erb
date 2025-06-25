@@ -1,4 +1,4 @@
-<%# locals: (form:, id:, default_view: nil, name: ) %>
+<%# locals: (form:, id:, default_view: nil, name:, placeholder: nil ) %>
 <div
   id="<%= id %>"
   data-turbo-permanent
@@ -21,6 +21,7 @@
                        data: {
                          clear_target: "input",
                        },
+                       placeholder:,
                        toolbar: "my_toolbar",
                        class:
                          "group-data-[rich-text-view-value=detail]:!min-h-40 bg-base-100" %>
