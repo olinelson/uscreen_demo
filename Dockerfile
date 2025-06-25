@@ -30,8 +30,18 @@ FROM base AS build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config && \
+    apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config unzip && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Install Bun
+ARG BUN_VERSION=1.1.42
+ENV BUN_INSTALL=/usr/local/bun
+ENV PATH=/usr/local/bun/bin:$PATH
+RUN curl -fsSL https://bun.sh/install | bash -s -- "bun-v${BUN_VERSION}"
+
+# Copy package files and install JS dependencies
+COPY package.json bun.lockb* ./
+RUN bun install --frozen-lockfile
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
