@@ -30,29 +30,20 @@
 
   </div>
 
-  <button
-    class="btn btn-square absolute top-4 right-4"
-    popovertarget="popover-1"
-    style="anchor-name:--anchor-1"
-  >
-    <%= icon "dots" %>
-  </button>
-  <ul
-    class="dropdown dropdown-end menu w-52 rounded-box bg-base-100 shadow-sm"
-    popover
-    id="popover-1"
-    style="position-anchor:--anchor-1"
-  >
-    <li>
-      <%= link_to "Edit this offer", edit_offer_path(@offer) %>
-    </li>
-    <li>
-      <%= button_to "Delete offer",
-      @offer,
-      method: :delete,
-      data: {
-        turbo_confirm: "Are you sure?:Deleting an offer can't be undone.",
-      } %>
-    </li>
-  </ul>
+  <div class="absolute top-4 right-4">
+    <%= render "shared/dropdown", icon: "dots", square: true, direction: "end" do %>
+      <li>
+        <%= link_to "Edit this offer", edit_offer_path(@offer) %>
+      </li>
+      <li>
+        <%= button_to "Delete offer",
+        @offer,
+        method: :delete,
+        data: {
+          turbo_confirm: "Are you sure?:Deleting an offer can't be undone.",
+        } %>
+      </li>
+    <% end %>
+  </div>
+
 </div>

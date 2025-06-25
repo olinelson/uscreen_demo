@@ -1,10 +1,22 @@
 <% content_for :title, "Showing video" %>
 
 <div class="container mx-auto p-4 grid">
+
   <div class="w-full rounded-md overflow-hidden pb-4">
     <video class="w-full aspect-video" src="<%= url_for(@video.file) %>" controls/>
   </div>
-  <h1 class="font-semibold text-4xl pb-2"><%= @video.title %></h1>
+  <div class="flex justify-between items-center">
+    <h1 class="font-semibold text-4xl pb-2"><%= @video.title %></h1>
+
+    <%= render "shared/dropdown", icon: "dots", square: true, direction: "end" do %>
+      <li>
+        <%= link_to "Edit video", edit_video_path(@video) %>
+      </li>
+      <li>
+        <%= button_to "Delete video", video_path(@video), method: :delete %>
+      </li>
+    <% end %>
+  </div>
 
   <div class="divider m-0"></div>
 

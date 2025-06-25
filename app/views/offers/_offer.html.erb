@@ -2,13 +2,13 @@
   id="<%= dom_id offer %>"
   class="
     rounded-md aspect-video w-xs relative transform transition-transform
-    duration-200 hover:scale-105 shadow-md border
+    duration-200 hover:scale-105 shadow-md overflow-hidden bg-base-100
   "
 >
   <div class="w-full h-full p-2">
     <div class="grid place-items-center pb-2">
       <h4 class="text-3xl semibold"><%= offer.title %></h4>
-      <h4 class="text-sm"><%= offer.subtitle %></h4>
+      <h4 class="text-xs max-w-40"><%= offer.subtitle %></h4>
     </div>
 
     <div class="grid place-items-center">

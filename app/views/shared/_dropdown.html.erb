@@ -1,0 +1,24 @@
+<%# locals: (title: nil, icon: nil, square: false, direction: "center") %>
+<div
+  class="
+    dropdown dropdown-center <%= "dropdown-end" if direction == "end" %>
+    <%= "dropdown-start" if direction == "start" %>
+  "
+>
+  <div
+    tabindex="0"
+    role="button"
+    class="btn m-1 btn-ghost <%= "btn-square" if square%>"
+  >
+    <%= title if title %>
+    <%= icon icon if icon %>
+  </div>
+  <ul
+    tabindex="0"
+    class="
+      dropdown-content menu bg-base-100 rounded-box z-1 w-full min-w-50 p-2 shadow-sm
+    "
+  >
+    <%= yield %>
+  </ul>
+</div>

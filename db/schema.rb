@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_24_061713) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_25_011037) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -98,8 +98,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_24_061713) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "offer_videos", "offers"
-  add_foreign_key "offer_videos", "videos"
+  add_foreign_key "offer_videos", "offers", on_delete: :cascade
+  add_foreign_key "offer_videos", "videos", on_delete: :cascade
   add_foreign_key "offers", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "videos", "users"
