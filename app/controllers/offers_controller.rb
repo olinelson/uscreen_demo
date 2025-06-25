@@ -8,17 +8,21 @@ class OffersController < ApplicationController
   # GET /offers/new
   def new
     @offer = Offer.new
+    first_video = Current.user.videos.first
+    @offer.videos << first_video if first_video
+    @return_to = params[:return_to]
   end
 
   # GET /offers/1/edit
   def edit
+    @return_to = params[:return_to]
   end
 
   # POST /offers
   def create
     @offer = Offer.new(offer_params)
     if @offer.save
-      return redirect_to @offer, notice: "Offer was successfully created."
+      return redirect_to params.fetch(:return_to, @offer), notice: "Offer was successfully created."
     end
     respond_to do |format|
         format.html { render :new, status: :unprocessable_entity }
@@ -35,7 +39,7 @@ class OffersController < ApplicationController
   # PATCH/PUT /offers/1
   def update
     if @offer.update(offer_params)
-      redirect_to @offer, notice: "Offer was successfully updated.", status: :see_other
+      redirect_to params.fetch(:return_to, @offer), notice: "Offer was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end

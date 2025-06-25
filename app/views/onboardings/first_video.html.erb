@@ -7,7 +7,8 @@
 
   <div class="card bg-base-100 shadow-xl">
     <div class="card-body">
-      <%= turbo_frame_tag "video_form", src: new_video_path %>
+      <%= turbo_frame_tag "video_form",
+      src: new_video_path({ return_to: onboarding_path }) %>
     </div>
   </div>
 </div>

@@ -13,6 +13,7 @@ class VideosController < ApplicationController
   # GET /videos/new
   def new
     @video = Video.new
+    @return_to = params[:return_to]
   end
 
   # GET /videos/1/edit
@@ -23,7 +24,7 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(video_create_params)
     if @video.save
-        return redirect_to @video, notice: "Video was successfully created."
+        return redirect_to params.fetch("return_to", @video), notice: "Video was successfully created."
     end
     respond_to do |format|
         format.html { render :new, status: :unprocessable_entity }

@@ -1,5 +1,10 @@
+<%# locals: (video:, return_to: nil ) %>
 <%= form_with(model: video, data: {controller: "form", turbo_frame: "_top" }) do |form| %>
   <%= render "shared/form_errors", errors: video.errors if video.errors.any? %>
+
+  <% if return_to %>
+    <%= hidden_field_tag :return_to, return_to %>
+  <% end %>
 
   <fieldset>
     <%= form.label :title %>

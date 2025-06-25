@@ -1,36 +1,44 @@
+<%# locals: (offer:, return_to: nil ) %>
 <%= form_with(model: offer, data: {controller: "form", turbo_frame: "_top"}) do |form| %>
   <%= render "shared/form_errors", errors: offer.errors if offer.errors.any? %>
+
+  <% if return_to %>
+    <% hidden_field_tag :return_to, return_to %>
+  <% end %>
+
   <fieldset>
     <%= form.hidden_field :user_id, value: Current.user.id %>
-
     <%= form.label :title %>
-    <%= form.text_field :title, required: :true %>
-
+    <%= form.text_field :title,
+                    required: :true,
+                    placeholder:
+                      "Enter your offer title - eg. 'Premium Video Course Bundle'" %>
     <%= form.label :subtitle %>
-    <%= form.text_field :subtitle, required: :true %>
-
+    <%= form.text_field :subtitle,
+                    required: :true,
+                    placeholder:
+                      "Add a compelling subtitle that describes your offer" %>
     <%= form.label :videos, "Select Videos" %>
     <%= form.collection_check_boxes :video_ids, Video.all, :id, :title do |b| %>
-      <%= b.label do %>
+      <%= b.label class: "aspect-video w-xs" do %>
         <div class="relative">
           <%= render b.object %>
           <div class="absolute inset-0 grid place-items-center">
             <%= b.check_box(class: "checkbox checkbox-primary") %>
           </div>
-
         </div>
       <% end %>
     <% end %>
-
     <%= form.label :description %>
     <%= render "shared/expanding_rich_text",
     form:,
     name: "description",
     id: "offer_description_input",
-    default_view: "detail" %>
+    default_view: "detail",
+    placeholder:
+      "Describe what makes this offer special. Include benefits, what's included, and why customers should choose this..." %>
   </fieldset>
-
   <div class="mt-4">
-    <%= form.submit %>
+    <%= form.submit "Create Offer", class: "btn btn-primary" %>
   </div>
 <% end %>
