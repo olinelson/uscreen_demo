@@ -105,7 +105,7 @@ export default function Dropzone({
       <label>
         <div className="flex flex-col items-center w-full">
           <div
-            className="h-40 border-2 border-dashed border-gray-300 rounded-lg p-4 cursor-pointer grid place-items-center w-full"
+            className="h-40 border-2 border-dashed border-gray-300 rounded-lg p-4 bg-base-100 cursor-pointer grid place-items-center w-full"
             onDrop={handleDrop}
             onDragOver={(e) => e.preventDefault()}
           >
