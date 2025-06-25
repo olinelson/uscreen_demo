@@ -7,9 +7,6 @@ import { application } from "./application"
 import ClipboardController from "./clipboard_controller"
 application.register("clipboard", ClipboardController)
 
-import ConfettiController from "./confetti_controller"
-application.register("confetti", ConfettiController)
-
 import ConfirmController from "./confirm_controller"
 application.register("confirm", ConfirmController)
 
