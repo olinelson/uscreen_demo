@@ -4,6 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   track(e) {
     const { event } = e.params
-    if (typeof plausible !== "undefined") plausible(this.eventValue)
+    if (typeof plausible !== "undefined") plausible(event)
   }
 }
