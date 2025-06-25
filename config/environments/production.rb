@@ -20,6 +20,11 @@ Rails.application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
+  #
+  config.action_controller.default_url_options = { host: "https://uscreen-test.fly.dev" }
+  #
+  config.action_cable.url = "wss://uscreen-test.fly.dev/cable"
+  config.action_cable.allowed_request_origins = [ "https://uscreen-test.fly.dev" ]
 
   # Store uploaded files in Tigris Global Object Storage (see config/storage.yml for options).
   config.active_storage.service = :tigris
@@ -58,7 +63,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
+  config.action_mailer.default_url_options = { host: "uscreen-test.fly.dev" }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {
@@ -80,10 +85,9 @@ Rails.application.configure do
   config.active_record.attributes_for_inspect = [ :id ]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
+  config.hosts = [
+    "ucreen-test.fly.dev"     # Allow requests from example.com
+  ]
   #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
