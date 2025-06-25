@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyString
+  title: The first video
+  description: A very good video
   user: one
 
 two:
-  title: MyString
-  description: MyString
+  title: The second video
+  description: A very very good video
   user: two

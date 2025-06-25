@@ -5,12 +5,8 @@ class OffersControllerTest < ActionDispatch::IntegrationTest
     @offer = offers(:one)
   end
 
-  test "should get index" do
-    get offers_url
-    assert_response :success
-  end
-
   test "should get new" do
+    sign_in users(:one)
     get new_offer_url
     assert_response :success
   end

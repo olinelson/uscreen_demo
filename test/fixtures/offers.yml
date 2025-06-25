@@ -2,12 +2,12 @@
 
 one:
   user: one
-  title: MyString
-  subtitle: MyString
-  description: MyString
+  title: Buy my thing!
+  subtitle: It's very good
+  description: Lots of good things will happen to you!
 
 two:
   user: two
-  title: MyString
-  subtitle: MyString
-  description: MyString
+  title: Buy my GREAT thing!
+  subtitle: Just do it
+  description: You really won't regret it!
