@@ -60,6 +60,6 @@ class OffersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def offer_params
-      params.expect(offer: [ :user_id, :title, :subtitle, :description ])
+      params.expect(offer: [ :user_id, :title, :subtitle, :description, video_ids: [] ])
     end
 end

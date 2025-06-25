@@ -9,6 +9,19 @@
     <%= form.label :subtitle %>
     <%= form.text_field :subtitle, required: :true %>
 
+    <%= form.label :videos, "Select Videos" %>
+    <%= form.collection_check_boxes :video_ids, Video.all, :id, :title do |b| %>
+      <%= b.label do %>
+        <div class="relative">
+          <%= render b.object %>
+          <div class="absolute inset-0 grid place-items-center">
+            <%= b.check_box(class: "checkbox checkbox-primary") %>
+          </div>
+
+        </div>
+      <% end %>
+    <% end %>
+
     <%= form.label :description %>
     <%= render "shared/expanding_rich_text",
     form:,
