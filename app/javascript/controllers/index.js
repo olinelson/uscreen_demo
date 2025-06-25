@@ -13,15 +13,6 @@ application.register("confetti", ConfettiController)
 import ConfirmController from "./confirm_controller"
 application.register("confirm", ConfirmController)
 
-import DirectUploadController from "./direct_upload_controller"
-application.register("direct-upload", DirectUploadController)
-
-import DragDropObserverController from "./drag_drop_observer_controller"
-application.register("drag-drop-observer", DragDropObserverController)
-
-import DropzoneController from "./dropzone_controller"
-application.register("dropzone", DropzoneController)
-
 import FormController from "./form_controller"
 application.register("form", FormController)
 
@@ -39,6 +30,3 @@ application.register("self-destruct", SelfDestructController)
 
 import TrixButtonController from "./trix_button_controller"
 application.register("trix-button", TrixButtonController)
-
-import VideoPlayerController from "./video_player_controller"
-application.register("video-player", VideoPlayerController)
