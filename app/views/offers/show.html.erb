@@ -1,59 +1,67 @@
 <% content_for :title, @offer.title %>
 <div class="hero bg-base-200 min-h-screen relative">
   <% if authenticated? && @offer.user == current_user %>
-
-    <div class="absolute top-4 left-4">
-      <% form = {data: {controller: "form", action: "plausible#track", plausible_event_param: "offer_#{@offer.published? ? "unpublish" : "publish" }_click" } } %>
-      <% params = { offer: { status:  @offer.published? ? :draft : :published } } %>
+    <div class="absolute top-2 left-2 right-2 grid grid-cols-3 items-center">
+      <% form = {
+        data: {
+          controller: "form",
+          action: "plausible#track",
+          plausible_event_param:
+            "offer_#{@offer.published? ? "unpublish" : "publish"}_click",
+        },
+      } %>
+      <% params = { offer: { status: @offer.published? ? :draft : :published } } %>
       <%= button_to @offer, method: :patch, form: , params: , class: "label" do %>
         <input
-         data-action="click->form#requestSubmit"
-         type="checkbox"
-         <%= @offer.published? ? "checked" : "" %>
-         class="toggle toggle-accent ">
-        </input>
+          data-action="click->form#requestSubmit"
+          type="checkbox"
+          <%= @offer.published? ? "checked" : "" %>
+          class="toggle toggle-accent"
+        >
         <%= icon "world" %>
         Public
       <% end %>
-    </div>
 
-    <% if @offer.published? %>
-        <div class="absolute top-4 z-10">
+      <% if @offer.published? %>
         <button
-            class="btn btn-primary btn-wide gap-2 group"
-            data-controller="clipboard"
-            data-clipboard-to-copy-value="<%= request.original_url %>"
-            data-clipboard-copied-value="false"
-            data-action="clipboard#copy"
+          class="
+            btn btn-sm sm:btn-md btn-primary gap-2 group justify-self-center
+          "
+          data-controller="clipboard"
+          data-clipboard-to-copy-value="<%= request.original_url %>"
+          data-clipboard-copied-value="false"
+          data-action="clipboard#copy"
         >
-            <%= icon "share" %>
-            <span class="font-semibold group-data-[clipboard-copied-value=false]:hidden">Copied to clipboard!</span>
-            <span class="font-semibold group-data-[clipboard-copied-value=true]:hidden">Share This Offer</span>
+          <%= icon "share" %>
+          <span class="font-semibold group-data-[clipboard-copied-value=false]:hidden">Copied to clipboard!</span>
+          <span class="font-semibold group-data-[clipboard-copied-value=true]:hidden">Share This Offer</span>
         </button>
-        </div>
-    <% end %>
-
-    <div class="absolute top-4 right-4">
-      <%= render "shared/dropdown", icon: "dots", square: true, direction: "end" do %>
-        <li>
-          <%= link_to "Edit this offer", edit_offer_path(@offer) %>
-        </li>
-        <li>
-          <%= button_to "Delete offer",
-          @offer,
-          method: :delete,
-          class: "cursor-pointer",
-          data: {
-            turbo_confirm: "Are you sure?:Deleting an offer can't be undone.",
-          } %>
-        </li>
       <% end %>
+      <div class="justify-self-end">
+        <%= render "shared/dropdown", icon: "dots", square: true, direction: "end" do %>
+          <li>
+            <%= link_to edit_offer_path(@offer) do %>
+              <%= icon "pencil" %>
+              Edit
+            <% end %>
+          </li>
+          <li>
+            <%= button_to @offer,
+            method: :delete,
+            class: "cursor-pointer flex gap-2 items-center",
+            data: {
+              turbo_confirm: "Are you sure?:Deleting an offer can't be undone.",
+            } do %>
+              <%= icon "trash" %>
+              Delete
+            <% end %>
+          </li>
+        <% end %>
+      </div>
     </div>
   <% end %>
   <div>
     <%= render "offers/hero_content", offer: @offer %>
   </div>
-
-
 
 </div>

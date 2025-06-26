@@ -18,15 +18,22 @@
 
     <%= render "shared/dropdown", icon: "dots", square: true, direction: "end" do %>
       <li>
-        <%= modal_link "Edit video", edit_video_path(@video), id: "edit_video_modal" %>
+        <%= modal_link edit_video_path(@video), id: "edit_video_modal" do %>
+          <%= icon "pencil" %>
+          Edit
+        <% end %>
+
       </li>
       <li>
-        <%= button_to "Delete video",
-        video_path(@video),
+        <%= button_to video_path(@video),
         method: :delete,
+        class: "flex items-center gap-2",
         data: {
           turbo_confirm: "Are you sure?:Deleting a video can't be undone.",
-        } %>
+        } do %>
+          <%= icon "trash" %>
+          Delete
+        <% end %>
       </li>
     <% end %>
   </div>
