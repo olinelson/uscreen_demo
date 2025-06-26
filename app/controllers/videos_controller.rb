@@ -1,8 +1,10 @@
 class VideosController < ApplicationController
   before_action :set_video, only: %i[ show edit update destroy ]
+  allow_unauthenticated_access only: %i[ show]
 
   # GET /videos/1 or /videos/1.json
   def show
+    return if @video.offers.exists?(status: :published)
     authorize! @video
   end
 
