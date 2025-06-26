@@ -5,6 +5,7 @@ class VideosController < ApplicationController
   # GET /videos/1 or /videos/1.json
   def show
     return if @video.offers.exists?(status: :published)
+    return redirect_to new_session_path unless !authenticated?
     authorize! @video
   end
 
