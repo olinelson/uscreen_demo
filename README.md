@@ -1,24 +1,11 @@
-# README
+# PetitScreen
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple demo app that enables a creator to make a simple offer with one video.
 
-Things you may want to cover:
+You can see an example offer that I made [🎥 here](https://uscreen-test.fly.dev/offers/3) where I talk about:
 
-* Ruby version
+- My approach
+- What metrics I'd use to consider the onboarding flow a success
+- How I work with AI
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
