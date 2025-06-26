@@ -8,25 +8,6 @@ class RegistrationsController < ApplicationController
     redirect_to after_authentication_url if authenticated?
     @user = User.new
     @price_id = params[:price_id]
-
-    # set_meta_tags(
-    #   title: "Sign up",
-    #   description: "Create a free Maestrocast account",
-    #   canonical: new_registration_url,
-    #   og: {
-    #     title: "Sign up",
-    #     type: "website",
-    #     url: new_registration_url,
-    #     image: helpers.image_url("call_camera_selector.png")
-    #   },
-    #   twitter: {
-    #     card: "photo",
-    #     title: "Maestrocast",
-    #     site: new_registration_url,
-    #     description: "Create a free Maestrocast account",
-    #     image: helpers.image_url("call_camera_selector.png")
-    #   }
-    # )
   end
 
   def create

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react"
 import { DirectUpload } from "@rails/activestorage"
 
 export default function Dropzone({
@@ -15,89 +15,106 @@ export default function Dropzone({
   const [progress, setProgress] = useState(0)
   const [error, setError] = useState(null)
   const [file, setFile] = useState(null)
-  const fileUploadComplete = progress == 100 && file
+
+  const fileUploadComplete = progress === 100 && file
 
   useEffect(() => {
     if (!file) return
     handleFileUpload(file)
   }, [file])
 
-  const handleFileUpload = (file) => {
-    if (!isFileValid(file)) return setError(acceptDescription)
-    setUploading(true)
-    setError(null)
-    setProgress(0)
+  const handleFileUpload = useCallback(
+    (file) => {
+      if (!isFileValid(file)) return setError(acceptDescription)
 
-    const upload = new DirectUpload(file, url, {
-      directUploadWillStoreFileWithXHR,
-    })
+      setUploading(true)
+      setError(null)
+      setProgress(0)
 
-    upload.create((error, blob) => {
-      if (error) {
-        console.error(error)
-        setError("Upload failed. Please try again.")
+      const upload = new DirectUpload(file, url, {
+        directUploadWillStoreFileWithXHR,
+      })
+
+      upload.create((error, blob) => {
+        if (error) {
+          console.error(error)
+          setError("Upload failed. Please try again.")
+          setUploading(false)
+          return
+        }
+        hiddenInputRef.current.value = blob.signed_id
         setUploading(false)
-        return
-      }
-      hiddenInputRef.current.value = blob.signed_id
-      setUploading(false)
-      setProgress(100)
-    })
-  }
+        setProgress(100)
+      })
+    },
+    [url, acceptDescription],
+  )
 
-  const isFileValid = (file) => {
-    return accept.split(",").some((allowedType) => {
-      if (allowedType.endsWith("/*")) {
-        const baseType = allowedType.split("/").at(0)
-        return file.type.startsWith(`${baseType}/`)
-      }
-      return file.type === allowedType
-    })
-  }
+  const isFileValid = useCallback(
+    (file) => {
+      return accept.split(",").some((allowedType) => {
+        if (allowedType.endsWith("/*")) {
+          const baseType = allowedType.split("/").at(0)
+          return file.type.startsWith(`${baseType}/`)
+        }
+        return file.type === allowedType
+      })
+    },
+    [accept],
+  )
 
-  const directUploadWillStoreFileWithXHR = (request) => {
+  const directUploadWillStoreFileWithXHR = useCallback((request) => {
     request.upload.addEventListener("progress", (event) => {
       if (!event.lengthComputable) return
       const progressPercent = Math.round((event.loaded / event.total) * 100)
       setProgress(progressPercent)
     })
-  }
+  }, [])
 
-  const handleDrop = (event) => {
+  const handleDrop = useCallback((event) => {
     event.preventDefault()
     const file = event.dataTransfer.files[0]
     setFile(file)
-  }
+  }, [])
 
-  const handleInputChange = (event) => {
+  const handleInputChange = useCallback((event) => {
     const file = event.target.files[0]
     setFile(file)
-  }
+  }, [])
 
-  const FileSuccess = () => (
-    <div className="grid place-items-center gap-2">
-      <div dangerouslySetInnerHTML={{ __html: circleCheckIcon }} />
-      <h4 className="flex gap-1">
-        <span className="truncate max-w-20 overflow-hidden text-ellipsis whitespace-nowrap block">
-          {file.name}
-        </span>{" "}
-        Uploaded
-      </h4>
-    </div>
+  const FileSuccess = useMemo(
+    () => (
+      <div className="grid place-items-center gap-2">
+        <div dangerouslySetInnerHTML={{ __html: circleCheckIcon }} />
+        <h4 className="flex gap-1">
+          <span className="truncate max-w-20 overflow-hidden text-ellipsis whitespace-nowrap block">
+            {file?.name}
+          </span>{" "}
+          Uploaded
+        </h4>
+      </div>
+    ),
+    [file?.name, circleCheckIcon],
   )
 
-  const Uploading = () => (
-    <div className="grid place-items-center gap-2">
-      <span className="loading loading-spinner loading-md"></span>
-      <p className="mt-2">Uploading... {progress}%</p>
-    </div>
+  const Uploading = useMemo(
+    () => (
+      <div className="grid place-items-center gap-2">
+        <span className="loading loading-spinner loading-md"></span>
+        <p className="mt-2">Uploading... {progress}%</p>
+      </div>
+    ),
+    [progress],
   )
 
-  const Ready = () => (
-    <div className="grid place-items-center gap-2">
-      <div dangerouslySetInnerHTML={{ __html: downloadIcon }} />
-      <p> Drag and drop a file here, or click to upload</p>
-    </div>
+  const Ready = useMemo(
+    () => (
+      <div className="grid place-items-center gap-2">
+        <div dangerouslySetInnerHTML={{ __html: downloadIcon }} />
+        <p>Drag and drop a file here, or click to upload</p>
+      </div>
+    ),
+    [downloadIcon],
   )
 
   return (
@@ -109,13 +126,7 @@ export default function Dropzone({
             onDrop={handleDrop}
             onDragOver={(e) => e.preventDefault()}
           >
-            {fileUploadComplete ? (
-              <FileSuccess />
-            ) : uploading ? (
-              <Uploading />
-            ) : (
-              <Ready />
-            )}
+            {fileUploadComplete ? FileSuccess : uploading ? Uploading : Ready}
           </div>
           <p className="text-red-500 mt-2 empty:invisible">{error}</p>
           <input
@@ -127,7 +138,6 @@ export default function Dropzone({
           />
         </div>
       </label>
-
       <input type="hidden" name={name} ref={hiddenInputRef} />
     </div>
   )
