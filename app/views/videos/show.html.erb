@@ -16,25 +16,27 @@
   <div class="flex justify-between items-center">
     <h1 class="font-semibold text-4xl pb-2"><%= @video.title %></h1>
 
-    <%= render "shared/dropdown", icon: "dots", square: true, direction: "end" do %>
-      <li>
-        <%= modal_link edit_video_path(@video), id: "edit_video_modal" do %>
-          <%= icon "pencil" %>
-          Edit
-        <% end %>
+    <% if authenticated? && allowed_to?(:edit?, @video ) %>
+      <%= render "shared/dropdown", icon: "dots", square: true, direction: "end" do %>
+        <li>
+          <%= modal_link edit_video_path(@video), id: "edit_video_modal" do %>
+            <%= icon "pencil" %>
+            Edit
+          <% end %>
 
-      </li>
-      <li>
-        <%= button_to video_path(@video),
+        </li>
+        <li>
+          <%= button_to video_path(@video),
         method: :delete,
         class: "flex items-center gap-2",
         data: {
           turbo_confirm: "Are you sure?:Deleting a video can't be undone.",
         } do %>
-          <%= icon "trash" %>
-          Delete
-        <% end %>
-      </li>
+            <%= icon "trash" %>
+            Delete
+          <% end %>
+        </li>
+      <% end %>
     <% end %>
   </div>
 
