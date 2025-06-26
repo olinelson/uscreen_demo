@@ -13,6 +13,9 @@ application.register("confirm", ConfirmController)
 import FormController from "./form_controller"
 application.register("form", FormController)
 
+import LinkNewTabController from "./link_new_tab_controller"
+application.register("link-new-tab", LinkNewTabController)
+
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
 
