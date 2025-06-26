@@ -22,21 +22,20 @@
         Public
       <% end %>
 
-      <% if @offer.published? %>
-        <button
-          class="
-            btn btn-sm sm:btn-md btn-primary gap-2 group justify-self-center
-          "
-          data-controller="clipboard"
-          data-clipboard-to-copy-value="<%= request.original_url %>"
-          data-clipboard-copied-value="false"
-          data-action="clipboard#copy"
-        >
-          <%= icon "share" %>
-          <span class="font-semibold group-data-[clipboard-copied-value=false]:hidden">Copied to clipboard!</span>
-          <span class="font-semibold group-data-[clipboard-copied-value=true]:hidden">Share This Offer</span>
-        </button>
-      <% end %>
+      <button
+        class="
+          btn btn-sm sm:btn-md btn-primary gap-2 group justify-self-center
+          <%= !@offer.published? ? "invisible" : "" %>
+        "
+        data-controller="clipboard"
+        data-clipboard-to-copy-value="<%= request.original_url %>"
+        data-clipboard-copied-value="false"
+        data-action="clipboard#copy"
+      >
+        <%= icon "share" %>
+        <span class="font-semibold group-data-[clipboard-copied-value=false]:hidden">Copied to clipboard!</span>
+        <span class="font-semibold group-data-[clipboard-copied-value=true]:hidden">Share This Offer</span>
+      </button>
       <div class="justify-self-end">
         <%= render "shared/dropdown", icon: "dots", square: true, direction: "end" do %>
           <li>
