@@ -1,6 +1,6 @@
 <% content_for :title, @offer.title %>
 
-<% if authenticated? && @offer.user == current_user %>
+<% if authenticated? && allowed_to?(:edit, @offer) %>
   <div class="pt-4 px-4 grid grid-cols-3 items-center">
     <% form = {
       data: {
