@@ -1,64 +1,65 @@
 <% content_for :title, @offer.title %>
-<div class="hero bg-base-200 min-h-screen relative">
-  <% if authenticated? && @offer.user == current_user %>
-    <div class="absolute top-2 left-2 right-2 grid grid-cols-3 items-center">
-      <% form = {
-        data: {
-          controller: "form",
-          action: "plausible#track",
-          plausible_event_param:
-            "offer_#{@offer.published? ? "unpublish" : "publish"}_click",
-        },
-      } %>
-      <% params = { offer: { status: @offer.published? ? :draft : :published } } %>
-      <%= button_to @offer, method: :patch, form: , params: , class: "label" do %>
-        <input
-          data-action="click->form#requestSubmit"
-          type="checkbox"
-          <%= @offer.published? ? "checked" : "" %>
-          class="toggle toggle-accent"
-        >
-        <%= icon "world" %>
-        Public
-      <% end %>
 
-      <button
-        class="
-          btn btn-sm sm:btn-md btn-primary gap-2 group justify-self-center
-          <%= !@offer.published? ? "invisible" : "" %>
-        "
-        data-controller="clipboard"
-        data-clipboard-to-copy-value="<%= request.original_url %>"
-        data-clipboard-copied-value="false"
-        data-action="clipboard#copy"
+<% if authenticated? && @offer.user == current_user %>
+  <div class="pt-4 px-4 grid grid-cols-3 items-center">
+    <% form = {
+      data: {
+        controller: "form",
+        action: "plausible#track",
+        plausible_event_param:
+          "offer_#{@offer.published? ? "unpublish" : "publish"}_click",
+      },
+    } %>
+    <% params = { offer: { status: @offer.published? ? :draft : :published } } %>
+    <%= button_to @offer, method: :patch, form: , params: , class: "label" do %>
+      <input
+        data-action="click->form#requestSubmit"
+        type="checkbox"
+        <%= @offer.published? ? "checked" : "" %>
+        class="toggle toggle-accent"
       >
-        <%= icon "share" %>
-        <span class="font-semibold group-data-[clipboard-copied-value=false]:hidden">Copied to clipboard!</span>
-        <span class="font-semibold group-data-[clipboard-copied-value=true]:hidden">Share This Offer</span>
-      </button>
-      <div class="justify-self-end">
-        <%= render "shared/dropdown", icon: "dots", square: true, direction: "end" do %>
-          <li>
-            <%= link_to edit_offer_path(@offer) do %>
-              <%= icon "pencil" %>
-              Edit
-            <% end %>
-          </li>
-          <li>
-            <%= button_to @offer,
-            method: :delete,
-            class: "cursor-pointer flex gap-2 items-center",
-            data: {
-              turbo_confirm: "Are you sure?:Deleting an offer can't be undone.",
-            } do %>
-              <%= icon "trash" %>
-              Delete
-            <% end %>
-          </li>
-        <% end %>
-      </div>
+      <%= icon "world" %>
+      Public
+    <% end %>
+
+    <button
+      class="
+        btn btn-sm sm:btn-md btn-primary gap-2 group justify-self-center
+        <%= !@offer.published? ? "invisible" : "" %>
+      "
+      data-controller="clipboard"
+      data-clipboard-to-copy-value="<%= request.original_url %>"
+      data-clipboard-copied-value="false"
+      data-action="clipboard#copy"
+    >
+      <%= icon "share" %>
+      <span class="font-semibold group-data-[clipboard-copied-value=false]:hidden">Copied to clipboard!</span>
+      <span class="font-semibold group-data-[clipboard-copied-value=true]:hidden">Share This Offer</span>
+    </button>
+    <div class="justify-self-end">
+      <%= render "shared/dropdown", icon: "dots", square: true, direction: "end" do %>
+        <li>
+          <%= link_to edit_offer_path(@offer) do %>
+            <%= icon "pencil" %>
+            Edit
+          <% end %>
+        </li>
+        <li>
+          <%= button_to @offer,
+          method: :delete,
+          class: "cursor-pointer flex gap-2 items-center",
+          data: {
+            turbo_confirm: "Are you sure?:Deleting an offer can't be undone.",
+          } do %>
+            <%= icon "trash" %>
+            Delete
+          <% end %>
+        </li>
+      <% end %>
     </div>
-  <% end %>
+  </div>
+<% end %>
+<div class="hero bg-base-200 min-h-screen relative">
   <div>
     <%= render "offers/hero_content", offer: @offer %>
   </div>
